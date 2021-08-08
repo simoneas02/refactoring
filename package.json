@@ -1,0 +1,15 @@
+{
+  "name": "refactoring",
+  "version": "1.0.0",
+  "description": "A code collection examples from Refactoring book.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "refactoring",
+    "javascript"
+  ],
+  "author": "Simone Amorim",
+  "license": "ISC"
+}
