@@ -9,7 +9,7 @@ export const statement = (invoice, plays) => {
     minimumFractionDigits: 2,
   }).format
 
-  function amountFor(aPerformance, play) {
+  const amountFor = (aPerformance, play) => {
     let result = 0
     switch (play.type) {
       case 'tragedy':
