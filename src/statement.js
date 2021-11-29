@@ -36,15 +36,14 @@ export const statement = (invoice, plays) => {
   }
 
   for (let perf of invoice.performances) {
-    const play = plays[perf.playID]
-
-    let thisAmount = amountFor(perf, play)
+    let thisAmount = amountFor(perf, playFor(perf))
 
     volumeCredits += Math.max(perf.audience - 30, 0)
 
-    if ('comedy' === play.type) volumeCredits += Math.floor(perf.audience / 5)
+    if ('comedy' === playFor(perf).type)
+      volumeCredits += Math.floor(perf.audience / 5)
 
-    result += `${play.name}: ${formatter(thisAmount / 100)} (${
+    result += `${playFor(perf).name}: ${formatter(thisAmount / 100)} (${
       perf.audience
     } seats)\n`
 
