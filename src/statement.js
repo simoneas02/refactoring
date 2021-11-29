@@ -1,5 +1,4 @@
 export const statement = (invoice, plays) => {
-  let totalAmount = 0
   let result = `Statement for ${invoice.customer}\n`
 
   const usd = aNumber =>
@@ -46,12 +45,12 @@ export const statement = (invoice, plays) => {
     return result
   }
 
-  for (let perf of invoice.performances) {
-    result += `${playFor(perf).name}: ${usd(amountFor(perf) / 100)} (${
-      perf.audience
-    } seats)\n`
-
-    totalAmount += amountFor(perf)
+  const totalAmount = () => {
+    let totalAmount = 0
+    for (let perf of invoice.performances) {
+      totalAmount += amountFor(perf)
+    }
+    return totalAmount
   }
 
   const totalVolumeCredits = () => {
@@ -59,9 +58,17 @@ export const statement = (invoice, plays) => {
     for (let perf of invoice.performances) {
       volumeCredits += volumeCreditsFor(perf)
     }
+
+    return volumeCredits
   }
 
-  result += `Amount owed is ${usd(totalAmount / 100)}\n`
+  for (let perf of invoice.performances) {
+    result += `${playFor(perf).name}: ${usd(amountFor(perf) / 100)} (${
+      perf.audience
+    } seats)\n`
+  }
+
+  result += `Amount owed is ${usd(totalAmount() / 100)}\n`
 
   result += `You earned ${totalVolumeCredits()} credits\n`
 
