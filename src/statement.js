@@ -3,11 +3,12 @@ export const statement = (invoice, plays) => {
   let volumeCredits = 0
   let result = `Statement for ${invoice.customer}\n`
 
-  const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-  }).format
+  const formatter = aNumber =>
+    new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+    }).format(aNumber)
 
   const playFor = aPerformance => plays[aPerformance.playID]
 
