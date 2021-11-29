@@ -36,17 +36,18 @@ export const statement = (invoice, plays) => {
   }
 
   const volumeCreditsFor = aPerformance => {
-    let volumeCredits = 0
-    volumeCredits += Math.max(aPerformance.audience - 30, 0)
+    let result = 0
+    result += Math.max(aPerformance.audience - 30, 0)
 
-    return volumeCredits
+    if ('comedy' === playFor(aPerformance).type) {
+      result += Math.floor(aPerformance.audience / 5)
+    }
+
+    return result
   }
 
   for (let perf of invoice.performances) {
     volumeCredits += volumeCreditsFor(perf)
-
-    if ('comedy' === playFor(perf).type)
-      volumeCredits += Math.floor(perf.audience / 5)
 
     result += `${playFor(perf).name}: ${formatter(amountFor(perf) / 100)} (${
       perf.audience
