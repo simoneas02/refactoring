@@ -9,6 +9,8 @@ export const statement = (invoice, plays) => {
     minimumFractionDigits: 2,
   }).format
 
+  const playFor = aPerformance => plays[aPerformance.playID]
+
   const amountFor = (aPerformance, play) => {
     let result = 0
     switch (play.type) {
