@@ -2,7 +2,7 @@
   "name": "refactoring",
   "version": "1.0.0",
   "description": "A code collection examples from Refactoring book.",
-  "main": "src/app.js",
+  "main": "src/index.js",
   "author": "Simone Amorim",
   "license": "ISC",
   "scripts": {
