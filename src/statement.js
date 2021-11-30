@@ -1,22 +1,15 @@
 export const statement = (invoice, plays) => {
   const statementData = {}
   statementData.customer = invoice.customer
-  statementData.performances = invoice.performances.map(
-    enrichPerformance,
-    plays
-  )
+  statementData.performances = invoice.performances.map(enrichPerformance)
 
   return renderPlainText(statementData, plays)
 }
 
-const enrichPerformance = (aPerformance, plays) => {
+const enrichPerformance = aPerformance => {
   const result = Object.assign({}, aPerformance)
-  result.play = playFor(aPerformance, plays)
-
   return result
 }
-
-const playFor = (aPerformance, plays) => plays[aPerformance.playID]
 
 const renderPlainText = (data, plays) => {
   let result = `Statement for ${data.customer}\n`
@@ -28,9 +21,11 @@ const renderPlainText = (data, plays) => {
       minimumFractionDigits: 2,
     }).format(aNumber)
 
+  const playFor = aPerformance => plays[aPerformance.playID]
+
   const amountFor = aPerformance => {
     let result = 0
-    switch (playFor(aPerformance, plays).type) {
+    switch (playFor(aPerformance).type) {
       case 'tragedy':
         result = 40000
         if (aPerformance.audience > 30) {
@@ -47,7 +42,7 @@ const renderPlainText = (data, plays) => {
         break
 
       default:
-        throw new Error(`unknown type: ${playFor(aPerformance, plays).type}`)
+        throw new Error(`unknown type: ${playFor(aPerformance).type}`)
     }
     return result
   }
@@ -56,7 +51,7 @@ const renderPlainText = (data, plays) => {
     let result = 0
     result += Math.max(aPerformance.audience - 30, 0)
 
-    if ('comedy' === playFor(aPerformance, plays).type) {
+    if ('comedy' === playFor(aPerformance).type) {
       result += Math.floor(aPerformance.audience / 5)
     }
 
@@ -81,7 +76,7 @@ const renderPlainText = (data, plays) => {
   }
 
   for (let perf of data.performances) {
-    result += `${playFor(perf, plays).name}: ${usd(amountFor(perf))} (${
+    result += `${playFor(perf).name}: ${usd(amountFor(perf))} (${
       perf.audience
     } seats)\n`
   }
