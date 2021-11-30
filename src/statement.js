@@ -1,7 +1,13 @@
-export const statement = (invoice, plays) => renderPlainText(invoice, plays)
+export const statement = (invoice, plays) => {
+  const statementData = {}
+  statementData.customer = invoice.customer
+  statementData.performances = invoice.performances
 
-const renderPlainText = (invoice, plays) => {
-  let result = `Statement for ${invoice.customer}\n`
+  return renderPlainText(statementData, plays)
+}
+
+const renderPlainText = (data, plays) => {
+  let result = `Statement for ${data.customer}\n`
 
   const usd = aNumber =>
     new Intl.NumberFormat('en-US', {
@@ -49,7 +55,7 @@ const renderPlainText = (invoice, plays) => {
 
   const totalAmount = () => {
     let result = 0
-    for (let perf of invoice.performances) {
+    for (let perf of data.performances) {
       result += amountFor(perf)
     }
     return result
@@ -57,14 +63,14 @@ const renderPlainText = (invoice, plays) => {
 
   const totalVolumeCredits = () => {
     let result = 0
-    for (let perf of invoice.performances) {
+    for (let perf of data.performances) {
       result += volumeCreditsFor(perf)
     }
 
     return result
   }
 
-  for (let perf of invoice.performances) {
+  for (let perf of data.performances) {
     result += `${playFor(perf).name}: ${usd(amountFor(perf))} (${
       perf.audience
     } seats)\n`
