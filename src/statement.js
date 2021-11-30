@@ -1,4 +1,6 @@
-export const statement = (invoice, plays) => {
+export const statement = (invoice, plays) => renderPlainText(invoice, plays)
+
+const renderPlainText = (invoice, plays) => {
   let result = `Statement for ${invoice.customer}\n`
 
   const usd = aNumber =>
@@ -63,12 +65,12 @@ export const statement = (invoice, plays) => {
   }
 
   for (let perf of invoice.performances) {
-    result += `${playFor(perf).name}: ${usd(amountFor(perf) / 100)} (${
+    result += `${playFor(perf).name}: ${usd(amountFor(perf))} (${
       perf.audience
     } seats)\n`
   }
 
-  result += `Amount owed is ${usd(totalAmount() / 100)}\n`
+  result += `Amount owed is ${usd(totalAmount())}\n`
 
   result += `You earned ${totalVolumeCredits()} credits\n`
 
