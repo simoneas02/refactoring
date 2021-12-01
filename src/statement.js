@@ -1,14 +1,6 @@
 export const statement = (invoice, plays) => {
   const playFor = aPerformance => plays[aPerformance.playID]
 
-  const enrichPerformance = aPerformance => {
-    const result = Object.assign({}, aPerformance)
-    result.play = playFor(result)
-    result.amount = amountFor(result)
-
-    return result
-  }
-
   const amountFor = invoice => {
     let result = 0
     switch (invoice.play.type) {
@@ -33,6 +25,26 @@ export const statement = (invoice, plays) => {
     return result
   }
 
+  const volumeCreditsFor = aPerformance => {
+    let result = 0
+    result += Math.max(aPerformance.audience - 30, 0)
+
+    if ('comedy' === aPerformance.play.type) {
+      result += Math.floor(aPerformance.audience / 5)
+    }
+
+    return result
+  }
+
+  const enrichPerformance = aPerformance => {
+    const result = Object.assign({}, aPerformance)
+    result.play = playFor(result)
+    result.amount = amountFor(result)
+    result.volumeCredits = volumeCreditsFor(result)
+
+    return result
+  }
+
   const statementData = {}
   statementData.customer = invoice.customer
   statementData.performances = invoice.performances.map(enrichPerformance)
@@ -50,17 +62,6 @@ const renderPlainText = (data, plays) => {
       minimumFractionDigits: 2,
     }).format(aNumber)
 
-  const volumeCreditsFor = aPerformance => {
-    let result = 0
-    result += Math.max(aPerformance.audience - 30, 0)
-
-    if ('comedy' === aPerformance.play.type) {
-      result += Math.floor(aPerformance.audience / 5)
-    }
-
-    return result
-  }
-
   const totalAmount = () => {
     let result = 0
     for (let perf of data.performances) {
@@ -72,7 +73,7 @@ const renderPlainText = (data, plays) => {
   const totalVolumeCredits = () => {
     let result = 0
     for (let perf of data.performances) {
-      result += volumeCreditsFor(perf)
+      result += perf.volumeCredits
     }
 
     return result
