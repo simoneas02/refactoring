@@ -36,22 +36,17 @@ export const statement = (invoice, plays) => {
     return result
   }
 
-  const totalAmount = invoice => {
-    let result = 0
-    for (let perf of invoice.performances) {
-      result += perf.amount
-    }
-    return result
-  }
+  const totalAmount = invoice =>
+    invoice.performances.reduce(
+      (total, aPerformance) => total + aPerformance.amount,
+      0
+    )
 
-  const totalVolumeCredits = invoice => {
-    let result = 0
-    for (let perf of invoice.performances) {
-      result += perf.volumeCredits
-    }
-
-    return result
-  }
+  const totalVolumeCredits = invoice =>
+    invoice.performances.reduce(
+      (total, aPerformance) => total + aPerformance.volumeCredits,
+      0
+    )
 
   const enrichPerformance = aPerformance => {
     const result = Object.assign({}, aPerformance)
