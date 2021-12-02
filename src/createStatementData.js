@@ -57,11 +57,11 @@ export const createStatementData = (invoice, plays) => {
     return result
   }
 
-  const statementData = {}
-  statementData.customer = invoice.customer
-  statementData.performances = invoice.performances.map(enrichPerformance)
-  statementData.totalAmount = totalAmount(statementData)
-  statementData.totalVolumeCredits = totalVolumeCredits(statementData)
+  const result = {}
+  result.customer = invoice.customer
+  result.performances = invoice.performances.map(enrichPerformance)
+  result.totalAmount = totalAmount(result)
+  result.totalVolumeCredits = totalVolumeCredits(result)
 
-  return statementData
+  return result
 }
