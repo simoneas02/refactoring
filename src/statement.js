@@ -3,15 +3,15 @@ import { createStatementData } from './createStatementData'
 export const htmlStatement = (invoice, plays) =>
   renderHtml(createStatementData(invoice, plays))
 
+const usd = aNumber =>
+  new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+  }).format(aNumber)
+
 const renderHtml = data => {
   let result = `Statement for ${data.customer}\n`
-
-  const usd = aNumber =>
-    new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 2,
-    }).format(aNumber)
 
   for (let perf of data.performances) {
     result += `${perf.play.name}: ${usd(perf.amount)} (${
