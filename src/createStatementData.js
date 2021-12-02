@@ -1,9 +1,6 @@
 export const createStatementData = (invoice, plays) => {
   const playFor = aPerformance => plays[aPerformance.playID]
 
-  const amountFor = aPerformance =>
-    new PerformanceCalculator(aPerformance, playFor(aPerformance)).amount
-
   const volumeCreditsFor = aPerformance => {
     let result = 0
     result += Math.max(aPerformance.audience - 30, 0)
@@ -34,7 +31,7 @@ export const createStatementData = (invoice, plays) => {
     )
     const result = Object.assign({}, aPerformance)
     result.play = calculator.play
-    result.amount = amountFor(result)
+    result.amount = calculator.amount
     result.volumeCredits = volumeCreditsFor(result)
 
     return result
