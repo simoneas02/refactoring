@@ -1,9 +1,9 @@
 import { createStatementData } from './createStatementData'
 
-export const statement = (invoice, plays) =>
-  renderPlainText(createStatementData(invoice, plays))
+export const htmlStatement = (invoice, plays) =>
+  renderHtml(createStatementData(invoice, plays))
 
-const renderPlainText = data => {
+const renderHtml = data => {
   let result = `Statement for ${data.customer}\n`
 
   const usd = aNumber =>
