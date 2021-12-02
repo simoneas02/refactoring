@@ -1,6 +1,8 @@
 const invoices = require('./data/invoices.json')
 const plays = require('./data/plays.json')
 
-import { statement } from './statement.js'
+import { statement, htmlStatement } from './statement.js'
 
 statement(invoices, plays)
+htmlStatement(invoices, plays)
+console.log(htmlStatement(invoices, plays))
