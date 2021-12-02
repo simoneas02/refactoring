@@ -14,7 +14,7 @@ export const createStatementData = (invoice, plays) => {
     )
 
   const enrichPerformance = aPerformance => {
-    const calculator = new PerformanceCalculator(
+    const calculator = createPerformanceCalculator(
       aPerformance,
       playFor(aPerformance)
     )
@@ -76,3 +76,6 @@ class PerformanceCalculator {
     return result
   }
 }
+
+const createPerformanceCalculator = (aPerformance, aPlay) =>
+  new PerformanceCalculator(aPerformance, aPlay)
