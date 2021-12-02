@@ -1,7 +1,7 @@
 import { createStatementData } from './createStatementData'
 
-export const htmlStatement = (invoice, plays) =>
-  renderHtml(createStatementData(invoice, plays))
+export const statement = (invoice, plays) =>
+  renderPlainText(createStatementData(invoice, plays))
 
 const usd = aNumber =>
   new Intl.NumberFormat('en-US', {
@@ -10,7 +10,7 @@ const usd = aNumber =>
     minimumFractionDigits: 2,
   }).format(aNumber)
 
-const renderHtml = data => {
+const renderPlainText = data => {
   let result = `Statement for ${data.customer}\n`
 
   for (let perf of data.performances) {
