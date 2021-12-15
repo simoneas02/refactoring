@@ -1,0 +1,21 @@
+{
+  "name": "production-plan",
+  "version": "1.0.0",
+  "description": "A simple application that allows a user to examine and manipulate a production plan.",
+  "main": "index.js",
+  "author": "Simone Amorim",
+  "license": "MIT",
+  "scripts": {
+    "start": "parcel index.html --open",
+    "build": "parcel build index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "refactoring",
+    "javascript"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
+}
