@@ -1,4 +1,4 @@
-class Producer {
+export class Producer {
   constructor(aProvince, data) {
     this._province = aProvince
     this._name = data.name

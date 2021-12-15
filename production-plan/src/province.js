@@ -1,3 +1,5 @@
+import { Producer } from './producer.js'
+
 export class Province {
   constructor(doc) {
     this._name = doc.name
@@ -6,7 +8,7 @@ export class Province {
     this._demand = doc.demand
     this._price = doc.price
 
-    doc._producers.forEach(d => this.addProducer(new Producer(this, d)))
+    doc.producers.forEach(d => this.addProducer(new Producer(this, d)))
   }
 
   get name() {

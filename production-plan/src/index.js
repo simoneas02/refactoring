@@ -1,3 +1,3 @@
-import { sampleProvinceData } from './province.js'
+import { Province, sampleProvinceData } from './province.js'
 
-console.log(sampleProvinceData())
+console.log(new Province(sampleProvinceData()))
