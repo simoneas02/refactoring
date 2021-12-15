@@ -5,4 +5,3 @@ import { statement, htmlStatement } from './statement.js'
 
 statement(invoices, plays)
 htmlStatement(invoices, plays)
-console.log(htmlStatement(invoices, plays))

@@ -39,7 +39,9 @@ const renderHtml = data => {
   result += `<p>Amount owed is <em>${usd(data.totalAmount)}</em></p>\n`
   result += `<p>You earned <em>${data.totalVolumeCredits}</em> credits</p>\n`
 
-  return result
+  const app = document.getElementById('app')
+
+  return (app.innerHTML = result)
 }
 
 export const htmlStatement = (invoice, plays) =>
