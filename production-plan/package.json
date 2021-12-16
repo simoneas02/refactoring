@@ -8,7 +8,7 @@
   "scripts": {
     "start": "parcel index.html --open",
     "build": "parcel build index.html",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watch"
   },
   "keywords": [
     "refactoring",
@@ -16,6 +16,8 @@
   ],
   "dependencies": {},
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.16.5",
+    "jest": "^27.4.5",
     "parcel-bundler": "^1.12.5"
   }
 }
