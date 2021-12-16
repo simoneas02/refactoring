@@ -3,7 +3,7 @@ export class Producer {
     this._province = aProvince
     this._name = data.name
     this._cost = data.cost
-    this.production = data.production || 0
+    this._production = data.production || 0
   }
 
   get name() {
